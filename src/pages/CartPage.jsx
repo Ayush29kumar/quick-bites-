@@ -77,7 +77,14 @@ export default function CartPage() {
         </OrderSummary>
       </div>
       {checkingOut && (
-        <CheckoutModal total={total} onClose={() => setCheckingOut(false)} onConfirm={handleConfirm} />
+        <CheckoutModal
+          subtotal={subtotal}
+          deliveryFee={deliveryFee}
+          tax={tax}
+          total={total}
+          onClose={() => setCheckingOut(false)}
+          onConfirm={handleConfirm}
+        />
       )}
     </>
   )

@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import Button from '../ui/Button'
+import PriceBreakdown from '../PriceBreakdown/PriceBreakdown'
 import { formatPrice } from '../../utils/format'
 
 const PHONE_RE = /^[0-9+\-\s]{10,15}$/
@@ -12,7 +13,7 @@ export function validateCheckout({ name, phone, address }) {
   return errors
 }
 
-export default function CheckoutModal({ total, onClose, onConfirm }) {
+export default function CheckoutModal({ subtotal, deliveryFee, tax, total, onClose, onConfirm }) {
   const [form, setForm] = useState({ name: '', phone: '', address: '' })
   const [errors, setErrors] = useState({})
   const [processing, setProcessing] = useState(false)
@@ -51,6 +52,7 @@ export default function CheckoutModal({ total, onClose, onConfirm }) {
       >
         <h2 id="checkout-title">Checkout</h2>
         <p className="muted">Demo checkout - no payment is taken.</p>
+        <PriceBreakdown subtotal={subtotal} deliveryFee={deliveryFee} tax={tax} total={total} />
         <form onSubmit={handleSubmit} noValidate className="checkout-form">
           <Field id="co-name" label="Full name" error={errors.name}>
             <input

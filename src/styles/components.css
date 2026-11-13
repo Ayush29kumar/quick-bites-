@@ -551,28 +551,78 @@
   top: calc(var(--navbar-height) + var(--space-4));
 }
 
-.order-summary dl {
+/* ---------- Price breakdown (cart summary + checkout modal) ---------- */
+.price-breakdown {
   display: flex;
   flex-direction: column;
   gap: var(--space-3);
   margin: 0;
 }
 
-.order-summary dl > div {
+.price-breakdown > div {
   display: flex;
   justify-content: space-between;
 }
 
-.order-summary dd {
+.price-breakdown dd {
   margin: 0;
   font-weight: 600;
 }
 
-.order-summary__total {
+.price-breakdown__free {
+  color: var(--color-success);
+}
+
+.price-breakdown__total {
   padding-top: var(--space-3);
   border-top: 1px solid var(--color-border);
   font-size: 1.15rem;
   font-weight: 700;
+}
+
+/* ---------- Free delivery progress ---------- */
+.free-delivery {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-3);
+  background: var(--color-primary-soft);
+  border-radius: var(--radius-sm);
+}
+
+.free-delivery__message {
+  margin: 0;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.free-delivery__track {
+  height: 8px;
+  overflow: hidden;
+  background: var(--color-border);
+  border-radius: var(--radius-pill);
+}
+
+.free-delivery__fill {
+  height: 100%;
+  background: var(--color-primary);
+  border-radius: var(--radius-pill);
+  transition: width 0.25s ease;
+}
+
+.free-delivery--unlocked {
+  background: #e6f6ee;
+  color: var(--color-success);
+}
+
+.free-delivery--unlocked .free-delivery__fill {
+  background: var(--color-success);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .free-delivery__fill {
+    transition: none;
+  }
 }
 
 /* ---------- Checkout modal ---------- */

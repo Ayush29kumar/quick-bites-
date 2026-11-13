@@ -53,7 +53,7 @@ src/
 - **State:** Context API with `useReducer`. The cart stores only `{ foodId, quantity }`; prices always come from the catalog.
 - **Persistence:** cart (`quickbite.cart`) and placed orders (`quickbite.orders`) are saved via safe `localStorage` helpers. Corrupt or unknown data is discarded on load.
 - **Data layer:** pages read data through `src/services/catalog.js`, so mock data can be swapped for a real API by changing that module.
-- **Pricing:** currency is INR. Delivery is a flat ₹40; tax is 5%.
+- **Pricing:** currency is INR. Delivery is ₹40, free when the food subtotal is ₹400 or more; tax is 5%.
 - **Images:** Noto Emoji artwork by Google, Apache 2.0, bundled locally. See `src/assets/images/ATTRIBUTION.md`.
 
 ## Testing
