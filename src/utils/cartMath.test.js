@@ -3,7 +3,6 @@ import {
   buildCartLines,
   calculateTotals,
   DELIVERY_FEE,
-  FREE_DELIVERY_THRESHOLD,
   getItemCount,
   getSubtotal,
 } from './cartMath'
@@ -13,14 +12,14 @@ describe('calculateTotals', () => {
     expect(calculateTotals(0)).toEqual({ subtotal: 0, deliveryFee: 0, tax: 0, total: 0 })
   })
 
-  it('adds delivery fee and 5% tax below the free delivery threshold', () => {
+  it('adds delivery fee and 5% tax', () => {
     expect(calculateTotals(200)).toEqual({ subtotal: 200, deliveryFee: DELIVERY_FEE, tax: 10, total: 250 })
   })
 
-  it('waives delivery at or above the threshold', () => {
-    const result = calculateTotals(FREE_DELIVERY_THRESHOLD)
-    expect(result.deliveryFee).toBe(0)
-    expect(result.total).toBe(525)
+  it('still charges delivery for large orders', () => {
+    const result = calculateTotals(500)
+    expect(result.deliveryFee).toBe(DELIVERY_FEE)
+    expect(result.total).toBe(565)
   })
 })
 

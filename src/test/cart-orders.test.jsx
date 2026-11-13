@@ -32,9 +32,9 @@ describe('cart', () => {
     expect(within(summary).getByText(/436\.9/)).toBeInTheDocument()
 
     await user.click(screen.getByRole('button', { name: /increase quantity of margherita pizza/i }))
-    // subtotal 627 -> free delivery, tax 31.35 => 658.35
-    expect(within(summary).getByText(/658\.35/)).toBeInTheDocument()
-    expect(within(summary).getByText('Free')).toBeInTheDocument()
+    // subtotal 627 -> delivery still 40, tax 31.35 => 698.35
+    expect(within(summary).getByText(/698\.35/)).toBeInTheDocument()
+    expect(within(summary).queryByText('Free')).not.toBeInTheDocument()
 
     await user.click(screen.getByRole('button', { name: /decrease quantity of margherita pizza/i }))
     await user.click(screen.getByRole('button', { name: /decrease quantity of margherita pizza/i }))
