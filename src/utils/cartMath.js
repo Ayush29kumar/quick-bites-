@@ -1,10 +1,16 @@
 export const DELIVERY_FEE = 40
+export const FREE_DELIVERY_THRESHOLD = 400
 export const TAX_RATE = 0.05
 
 const round2 = (n) => Math.round(n * 100) / 100
 
+// The threshold is checked against the food subtotal only (never includes delivery or tax).
+export const qualifiesForFreeDelivery = (subtotal) => subtotal >= FREE_DELIVERY_THRESHOLD
+
+export const getAmountToFreeDelivery = (subtotal) => Math.max(0, FREE_DELIVERY_THRESHOLD - subtotal)
+
 export function calculateTotals(subtotal) {
-  const deliveryFee = subtotal === 0 ? 0 : DELIVERY_FEE
+  const deliveryFee = subtotal === 0 || qualifiesForFreeDelivery(subtotal) ? 0 : DELIVERY_FEE
   const tax = round2(subtotal * TAX_RATE)
   const total = round2(subtotal + deliveryFee + tax)
   return { subtotal: round2(subtotal), deliveryFee, tax, total }

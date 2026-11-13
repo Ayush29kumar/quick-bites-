@@ -15,7 +15,7 @@ This file provides guidance to agents when working with code in this repository.
 - Persist via `loadJSON`/`saveJSON` in `src/utils/storage.js` (never throw); keys are `quickbite.cart` and `quickbite.orders`. Only user-placed orders are persisted; `seedOrders` are always appended in `OrdersContext`.
 - Context hooks (`useCart`, `useOrders`, `useToast`) all live in `src/hooks/useStore.js` and throw outside their provider. Provider nesting order: Toast > Cart > Orders (same in `main.jsx` and `src/test/test-utils.jsx`).
 - Food images: use `getImage('<UNICODE HEX>')` from `src/data/images.js` (bundled Noto SVGs in `src/assets/images/`, falls back to `1F3EA`). Don't use remote image URLs (app is offline-only; no backend/paid APIs).
-- Money: INR, format with `formatPrice` (`src/utils/format.js`). Pricing constants (flat delivery ₹40, 5% tax) are in `cartMath.js`.
+- Money: INR, format with `formatPrice` (`src/utils/format.js`). Pricing constants (delivery ₹40, free at a food subtotal of ₹400 or more via `FREE_DELIVERY_THRESHOLD`, 5% tax) are in `cartMath.js`.
 
 ## Tests
 - Use `renderWithProviders(ui, { route })` / `renderApp(route)` from `src/test/test-utils.jsx` (wraps MemoryRouter + all providers). `localStorage` is cleared before each test in `src/test/setup.js`.
